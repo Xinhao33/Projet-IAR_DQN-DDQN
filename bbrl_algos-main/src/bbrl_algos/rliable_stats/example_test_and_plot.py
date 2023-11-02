@@ -3,6 +3,10 @@ In this script we show how to test and plot RL results.
 
 """
 import sys
+sys.path.append("E:/sorbonne/IAR/mini_projet/bbrl_algos/src/")
+
+
+import sys
 
 import numpy as np
 import matplotlib
@@ -16,12 +20,22 @@ sys.path.append("../")
 
 save = False  # save in ./plot.png if True
 
+# load data
+dqn_lunarlander = np.loadtxt("./data_files/dqn_LunarLander-v2.txt").T
+ddqn_lunarlander = np.loadtxt("./data_files/ddqn_LunarLander-v2.txt").T
+print("dqn_lunarlander: ",dqn_lunarlander.shape)
+print("ddqn_lunarlander: ",ddqn_lunarlander.shape)
+nb_datapoints = dqn_lunarlander.shape[1]
+nb_steps = dqn_lunarlander.shape[0]
 sac_perfs = np.loadtxt("./data_files/sac_hc_all_perfs.txt")
 td3_perfs = np.loadtxt("./data_files/td3_hc_all_perfs.txt")
-nb_datapoints = sac_perfs.shape[1]
-nb_steps = sac_perfs.shape[0]
+print("sac_perfs: ",sac_perfs.shape)
+print("td3_perfs: ",td3_perfs.shape)
+#nb_datapoints = sac_perfs.shape[1]
+#nb_steps = sac_perfs.shape[0]
 
-legend = ["SAC", "TD3"]
+#legend = ["SAC", "TD3"]
+legend = ["DQN", "DDQN"]
 
 # what do you want to plot ?
 id_central = "median"  # 'mean'
@@ -33,8 +47,10 @@ test_id = "Welch t-test"  # recommended
 confidence_level = 0.01
 
 sample_size = 20
-sample1 = sac_perfs[:, np.random.randint(0, nb_datapoints, sample_size)]
-sample2 = td3_perfs[:, np.random.randint(0, nb_datapoints, sample_size)]
+#sample1 = sac_perfs[:, np.random.randint(0, nb_datapoints, sample_size)]
+#sample2 = td3_perfs[:, np.random.randint(0, nb_datapoints, sample_size)]
+sample1 = dqn_lunarlander[:, np.random.randint(0, nb_datapoints, sample_size)]
+sample2 = ddqn_lunarlander[:, np.random.randint(0, nb_datapoints, sample_size)]
 
 # downsample for visualization purpose
 downsampling_fact = 5

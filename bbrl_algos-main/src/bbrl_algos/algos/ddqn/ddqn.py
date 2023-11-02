@@ -108,7 +108,7 @@ def compute_critic_loss(
 
     # Extract the Q-values for the actions chosen by the agent
     act = action[0].unsqueeze(dim=-1)
-    qvals = q_values[0].gather(dim=-1, index=act).squeeze(dim=-1)
+    qvals = q_values[0].gather(dim=1, index=act).squeeze(dim=1)
 
     # Return the mean squared error loss
     return nn.MSELoss()(qvals, target)

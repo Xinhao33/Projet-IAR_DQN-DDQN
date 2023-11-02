@@ -17,3 +17,10 @@ We suggest using your favorite python environment (conda, venv, ...) as some fur
 ## Usage
 
 go to src/bbrl_algos, choose your algorithm and run python3 your_algorithm.py
+
+
+## quelques remarques
+Pour faire le test performance, il faut convertir les ficher .data en .txt en utilisant read_data.py qui est dans src.
+Après avoir converti les fichiers, il faut les mettre dans le dossier rliable_stats/data_files puis lancer le script example_test_and_plot.py qui est dans rliable_stats. 
+
+N'oublie pas de changer des chemins absolus dans les scripts.
